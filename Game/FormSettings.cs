@@ -41,7 +41,7 @@ namespace Game
             if (colorDialogUser.ShowDialog() == DialogResult.OK)
             {
                 colorUser = colorDialogUser.Color;
-                buttonUserChoose.BackColor = colorDialogUser.Color;
+                //buttonUserChoose.BackColor = colorDialogUser.Color;
             }
         }
 
@@ -50,7 +50,7 @@ namespace Game
             if (colorDialogBot.ShowDialog() == DialogResult.OK)
             {
                 colorBot = colorDialogBot.Color;
-                buttonBotChoose.BackColor = colorDialogBot.Color;
+                //buttonBotChoose.BackColor = colorDialogBot.Color;
             }
         }
 

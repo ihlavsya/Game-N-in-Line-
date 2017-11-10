@@ -10,7 +10,6 @@ namespace Game
     {
         public PlayerCell[,] Field;
         public int[] FreePositions;
-        // 'ColsCount' sounds better.
         public int QuanCols;
         public int QuanRows;
         public int N;

@@ -12,35 +12,35 @@ namespace Game
 {
     public partial class FormSettings : Form
     {
-        private Color colorUser;
-        private Color colorBot;
+        private Color _ColorUser;
+        private Color _ColorBot;
 
-        private int n;
+        private int _N;
 
-        private FormGame a;
+        private FormGame _MainForm;
 
         public FormSettings()
         {
             InitializeComponent();
         }
 
-        public FormSettings(FormGame b):this()
+        public FormSettings(FormGame mainForm) : this()
         {
-            a = b;
+            _MainForm = mainForm;
         }
 
         public void GetData()
         {
-            a.N = n;
-            a.colorUser = colorUser;
-            a.colorBot = colorBot;
+            _MainForm.N = _N;
+            _MainForm.ColorUser = _ColorUser;
+            _MainForm.ColorBot = _ColorBot;
         }
 
         private void buttonUserSubmit_Click(object sender, EventArgs e)
         {
             if (colorDialogUser.ShowDialog() == DialogResult.OK)
             {
-                colorUser = colorDialogUser.Color;
+                _ColorUser = colorDialogUser.Color;
                 //buttonUserChoose.BackColor = colorDialogUser.Color;
             }
         }
@@ -49,7 +49,7 @@ namespace Game
         {
             if (colorDialogBot.ShowDialog() == DialogResult.OK)
             {
-                colorBot = colorDialogBot.Color;
+                _ColorBot = colorDialogBot.Color;
                 //buttonBotChoose.BackColor = colorDialogBot.Color;
             }
         }
@@ -67,7 +67,7 @@ namespace Game
 
         private void trackBarN_ValueChanged(object sender, EventArgs e)
         {
-            n = trackBarN.Value;
+            _N = trackBarN.Value;
         }
     }
 }

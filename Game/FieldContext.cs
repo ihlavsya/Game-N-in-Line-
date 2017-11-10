@@ -24,19 +24,19 @@ namespace Game
             FreePositions = new int[QuanCols];
         }
 
-        public void FillField(int col,PlayerCell a)
+        public void FillField(int col, PlayerCell a)
         {
-            Field[FreePositions[col],col] =a;//не работает
+            Field[FreePositions[col], col] = a;//не работает
             FreePositions[col]++;
         }
 
-        private bool Overflow(PlayerCell [,]field)
+        private bool Overflow(PlayerCell[,] field)
         {
             for (int i = 0; i < field.GetLength(0); i++)
             {
                 for (int j = 0; j < field.GetLength(1); j++)
                 {
-                    if (field[i,j] == PlayerCell.Empty)
+                    if (field[i, j] == PlayerCell.Empty)
                     {
                         return false;
                     }
@@ -47,7 +47,7 @@ namespace Game
 
         public int EndOfTheGame(PlayerCell flag)
         {
-            Line[] arr1 = LinesCounter.HorLines(N, Field, flag);
+            Line[] arr1 = LinesCounter.HorLines(this, flag);
             for (int i = 1; i < arr1[0].length; i++)
             {
                 if (arr1[i].length >= N)
@@ -55,7 +55,7 @@ namespace Game
                     return 1;
                 }
             }
-            Line[] arr2 = LinesCounter.VerLines(N, Field, flag);
+            Line[] arr2 = LinesCounter.VerLines(this, flag);
             for (int i = 1; i < arr2[0].length; i++)
             {
                 if (arr2[i].length >= N)
@@ -63,7 +63,7 @@ namespace Game
                     return 1;
                 }
             }
-            Line[] arr3 = LinesCounter.DiagLeft(N, Field, flag);
+            Line[] arr3 = LinesCounter.DiagLeft(this, flag);
             for (int i = 1; i < arr3[0].length; i++)
             {
                 if (arr3[i].length >= N)
@@ -71,7 +71,7 @@ namespace Game
                     return 1;
                 }
             }
-            Line[] arr4 = LinesCounter.DiagRight(N, Field, flag);
+            Line[] arr4 = LinesCounter.DiagRight(this, flag);
             for (int i = 1; i < arr4[0].length; i++)
             {
                 if (arr4[i].length >= N)

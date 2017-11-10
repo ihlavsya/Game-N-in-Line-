@@ -12,22 +12,22 @@ namespace Game
 {
     public partial class FormGameProcess : Form
     {
-        private FieldContext newGameField;
-        private RealPlayer user;
-        private BotPlayer bot;
-        private Size CellSize;
+        private FieldContext _NewGameField;
+        private RealPlayer _User;
+        private BotPlayer _Bot;
+        private Size _CellSize;
         public FormGameProcess()
         {
             InitializeComponent();
         }
 
-        public FormGameProcess(int N,Color a,Color b) :this()
+        public FormGameProcess(int N, Color a, Color b) : this()
         {
-            newGameField = new FieldContext(N);
-            user = new RealPlayer(a);
-            bot = new BotPlayer(b);
-            CellSize.Width = GetCellSize().Width;
-            CellSize.Height = GetCellSize().Height;
+            _NewGameField = new FieldContext(N);
+            _User = new RealPlayer(a);
+            _Bot = new BotPlayer(b);
+            _CellSize.Width = GetCellSize().Width;
+            _CellSize.Height = GetCellSize().Height;
         }
 
         private void FormGameProcess_Load(object sender, EventArgs e)
@@ -37,14 +37,14 @@ namespace Game
 
         private void DrawNet(PaintEventArgs e)
         {
-            for (int i = 1; i < newGameField.QuanCols; i++)
+            for (int i = 1; i < _NewGameField.QuanCols; i++)
             {
-                e.Graphics.DrawLine(new Pen(Color.Black), new Point(i * CellSize.Width, 0), new Point(i * CellSize.Width, panelGameArea.Height));
+                e.Graphics.DrawLine(new Pen(Color.Black), new Point(i * _CellSize.Width, 0), new Point(i * _CellSize.Width, panelGameArea.Height));
             }
 
-            for (int i = 1; i < newGameField.QuanRows; i++)
+            for (int i = 1; i < _NewGameField.QuanRows; i++)
             {
-                e.Graphics.DrawLine(new Pen(Color.Black), new Point(0, i * CellSize.Height), new Point(panelGameArea.Width, i * CellSize.Height));
+                e.Graphics.DrawLine(new Pen(Color.Black), new Point(0, i * _CellSize.Height), new Point(panelGameArea.Width, i * _CellSize.Height));
             }
         }
 
@@ -52,28 +52,28 @@ namespace Game
         {
             DrawNet(e);
 
-            for (int i = 0; i < newGameField.QuanRows; i++)
+            for (int i = 0; i < _NewGameField.QuanRows; i++)
             {
-                for (int j = 0; j < newGameField.QuanCols; j++)
+                for (int j = 0; j < _NewGameField.QuanCols; j++)
                 {
-                    if (newGameField.Field[i, j] != PlayerCell.Empty)
+                    if (_NewGameField.Field[i, j] != PlayerCell.Empty)
                     {
-                        Color b=Color.White;
-                        if (PlayerCell.Hero==newGameField.Field[i,j])
+                        Color b = Color.White;
+                        if (PlayerCell.Hero == _NewGameField.Field[i, j])
                         {
-                            b = user.playerColor;
+                            b = _User.playerColor;
                         }
-                        if (PlayerCell.Antagonist == newGameField.Field[i, j])
+                        if (PlayerCell.Antagonist == _NewGameField.Field[i, j])
                         {
-                            b = bot.playerColor;
+                            b = _Bot.playerColor;
                         }
-                        DrawCell(j * CellSize.Width, CellSize.Height * (newGameField.QuanRows - i-1), CellSize.Width, CellSize.Height, e,b);
+                        DrawCell(j * _CellSize.Width, _CellSize.Height * (_NewGameField.QuanRows - i - 1), _CellSize.Width, _CellSize.Height, e, b);
                     }
                 }
             }
         }
 
-        private void DrawCell(int x,int y,int width,int height,PaintEventArgs e, Color a)
+        private void DrawCell(int x, int y, int width, int height, PaintEventArgs e, Color a)
         {
             Rectangle rect = new Rectangle(x, y, width, height);
             SolidBrush blueBrush = new SolidBrush(a);
@@ -83,34 +83,34 @@ namespace Game
 
         private Size GetCellSize()
         {
-            Size a = new Size(panelGameArea.Width / newGameField.QuanCols, panelGameArea.Height / newGameField.QuanRows);
+            Size a = new Size(panelGameArea.Width / _NewGameField.QuanCols, panelGameArea.Height / _NewGameField.QuanRows);
             return a;
         }
 
         private void panelGameArea_MouseClick(object sender, MouseEventArgs e)
         {
             Point coordinates = e.Location;
-            int col =coordinates.X / CellSize.Width;
-            user.MakeStep(col,newGameField,PlayerCell.Hero);
+            int col = coordinates.X / _CellSize.Width;
+            _User.MakeStep(col, _NewGameField, PlayerCell.Hero);
             panelGameArea.Invalidate();
-            if (newGameField.EndOfTheGame(PlayerCell.Hero) == 1)
+            if (_NewGameField.EndOfTheGame(PlayerCell.Hero) == 1)
             {
                 MessageBox.Show("You won!");
                 this.Close();
             }
-            if(newGameField.EndOfTheGame(PlayerCell.Hero)==0)
+            if (_NewGameField.EndOfTheGame(PlayerCell.Hero) == 0)
             {
                 MessageBox.Show("Draw!");
                 this.Close();
             }
-            bot.MakeStep(0, newGameField, PlayerCell.Hero);
+            _Bot.MakeStep(0, _NewGameField, PlayerCell.Hero);
             panelGameArea.Invalidate();
-            if (newGameField.EndOfTheGame(PlayerCell.Antagonist) == 1)
+            if (_NewGameField.EndOfTheGame(PlayerCell.Antagonist) == 1)
             {
                 MessageBox.Show("Bot won!");
                 this.Close();
             }
-            if (newGameField.EndOfTheGame(PlayerCell.Antagonist) == 0)
+            if (_NewGameField.EndOfTheGame(PlayerCell.Antagonist) == 0)
             {
                 MessageBox.Show("Draw!");
                 this.Close();

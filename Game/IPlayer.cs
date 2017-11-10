@@ -9,63 +9,60 @@ namespace Game
 {
     public enum PlayerCell
     {
-       Empty=0,
-       Hero,
-       Antagonist
+        Empty = 0,
+        Hero,
+        Antagonist
     }
     public interface IPlayer
     {
         Color playerColor { get; set; }
-        void MakeStep(int col,FieldContext gameProcess,PlayerCell first);
+        void MakeStep(int col, FieldContext gameProcess, PlayerCell first);
     }
 
-    public class RealPlayer:IPlayer
+    public class RealPlayer : IPlayer
     {
         public Color playerColor { get; set; }
         public RealPlayer(Color color)
         {
             playerColor = color;
         }
-        public void MakeStep(int col, FieldContext gameProcess,PlayerCell first)
+        public void MakeStep(int col, FieldContext gameProcess, PlayerCell first)
         {
-            gameProcess.FillField(col,PlayerCell.Hero);
+            gameProcess.FillField(col, PlayerCell.Hero);
         }
 
         public void GetFromConsoleUserStep(FieldContext gameProcess, PlayerCell first)
         {
-            
-            string a=Console.ReadLine();
+
+            string a = Console.ReadLine();
             int col = 0;
-            for (int i=0;i<a.Length;i++)
+            for (int i = 0; i < a.Length; i++)
             {
                 col *= 10;
                 int c = a[i] - '0';
                 col += c;
             }
-            MakeStep(col,gameProcess,first);
+            MakeStep(col, gameProcess, first);
         }
     }
 
     public class Win
     {
-        private int w;
-        public int W{ get; set; }
+        public int W { get; set; }
         public Win(int k)
         {
-            w = k;
+            W = k;
         }
     }
 
-    public class BotPlayer:IPlayer
+    public class BotPlayer : IPlayer
     {
         public Color playerColor { get; set; }
         public BotPlayer(Color color)
         {
             playerColor = color;
-            StepScoreZero.Step = 0;
-            StepScoreZero.Score = 0;
         }
-        public void MakeStep(int col, FieldContext gameProcess,PlayerCell first)
+        public void MakeStep(int col, FieldContext gameProcess, PlayerCell first)
         {
             int k = 0;
             for (int i = 0; i < 2 * gameProcess.N - 1; i++)
@@ -99,9 +96,9 @@ namespace Game
             public long Score;
         }
 
-        private static StepScore StepScoreZero;
+        private static StepScore StepScoreZero = new StepScore { Step = 0, Score = 0 };
 
-        StepScore Minimax(FieldContext gameProcess, PlayerCell first, PlayerCell flag, int deep, int col,Win aWin)
+        StepScore Minimax(FieldContext gameProcess, PlayerCell first, PlayerCell flag, int deep, int col, Win aWin)
         {
             StepScore s = StepScoreZero;
 
@@ -124,7 +121,7 @@ namespace Game
             }
             if (c != -1 || deep == 3)
             {
-                if (col!=-1)
+                if (col != -1)
                 {
                     s.Score = Heuristic.heuristic(gameProcess, first, gameProcess.GetOppositePlayer(flag));
                     s.Step = col;
@@ -134,7 +131,7 @@ namespace Game
                 }
             }
 
-            StepScore a=StepScoreZero;
+            StepScore a = StepScoreZero;
             a.Step = -1;
 
             if ((deep + 1) % 2 == 0)
@@ -146,8 +143,8 @@ namespace Game
             {
                 if (gameProcess.FreePositions[i] != gameProcess.QuanRows)
                 {
-                    StepScore f = Minimax(gameProcess, first, gameProcess.GetOppositePlayer(flag), deep + 1, i,aWin);
-                    if (aWin.W!=0)
+                    StepScore f = Minimax(gameProcess, first, gameProcess.GetOppositePlayer(flag), deep + 1, i, aWin);
+                    if (aWin.W != 0)
                     {
                         return f;
                     }

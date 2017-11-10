@@ -11,7 +11,7 @@ namespace Game
         public static long heuristic(FieldContext gameProcess, PlayerCell first, PlayerCell flag)
         {
             long score = 0;
-            score = HeuristicHero(gameProcess.N, gameProcess.Field, first, flag);
+            score = HeuristicHero(gameProcess, first, flag);
 
             if (Math.Abs(score) >= 1e12)
             {
@@ -19,8 +19,8 @@ namespace Game
             }
 
             long oppositeScore = 0;
-            oppositeScore = heuristicAntagonist(gameProcess.N, gameProcess.Field, first, gameProcess.GetOppositePlayer(flag)); //при этой и нижней строке одинаковый результат
-                                                                                      //	oppositeScore = heuristicUser(n, field, first, getOppositeFlag(flag));
+            oppositeScore = heuristicAntagonist(gameProcess, first, gameProcess.GetOppositePlayer(flag)); //при этой и нижней строке одинаковый результат
+                                                                                                          //	oppositeScore = heuristicUser(n, field, first, getOppositeFlag(flag));
             score += oppositeScore;
             return score;
         }
@@ -65,21 +65,21 @@ namespace Game
             return sum;
 
         }
-        private static long HeuristicHero(int n, PlayerCell[,] field, PlayerCell first, PlayerCell flag)
+        private static long HeuristicHero(FieldContext gameProcess, PlayerCell first, PlayerCell flag)
         {
             long score = 0;
 
-            Line[] arr = LinesCounter.DiagLeft(n, field, flag);
-            score += HeuristicLineHero(arr, n, first, flag);
+            Line[] arr = LinesCounter.DiagLeft(gameProcess, flag);
+            score += HeuristicLineHero(arr, gameProcess.N, first, flag);
 
-            arr = LinesCounter.DiagRight(n, field, flag);
-            score += HeuristicLineHero(arr, n, first, flag);
+            arr = LinesCounter.DiagRight(gameProcess, flag);
+            score += HeuristicLineHero(arr, gameProcess.N, first, flag);
 
-            arr = LinesCounter.HorLines(n, field, flag);
-            score += HeuristicLineHero(arr, n, first, flag);
+            arr = LinesCounter.HorLines(gameProcess, flag);
+            score += HeuristicLineHero(arr, gameProcess.N, first, flag);
 
-            arr = LinesCounter.VerLines(n, field, flag);
-            score += HeuristicLineHero(arr, n, first, flag);
+            arr = LinesCounter.VerLines(gameProcess, flag);
+            score += HeuristicLineHero(arr, gameProcess.N, first, flag);
 
             if (flag == PlayerCell.Antagonist)
             {
@@ -89,21 +89,21 @@ namespace Game
             return score;
         }
 
-        private static long heuristicAntagonist(int n, PlayerCell[,]field, PlayerCell first, PlayerCell flag)
+        private static long heuristicAntagonist(FieldContext gameProcess, PlayerCell first, PlayerCell flag)
         {
             long score = 0;
 
-            Line[] arr = LinesCounter.DiagLeft(n,field,flag);
-            score += HeuristicLineAntagonist(arr, n, first, flag);
+            Line[] arr = LinesCounter.DiagLeft(gameProcess, flag);
+            score += HeuristicLineAntagonist(arr, gameProcess.N, first, flag);
 
-            arr = LinesCounter.DiagRight(n, field, flag);
-            score += HeuristicLineAntagonist(arr, n, first, flag);
+            arr = LinesCounter.DiagRight(gameProcess, flag);
+            score += HeuristicLineAntagonist(arr, gameProcess.N, first, flag);
 
-            arr = LinesCounter.HorLines(n, field, flag);
-            score += HeuristicLineAntagonist(arr, n, first, flag);
+            arr = LinesCounter.HorLines(gameProcess, flag);
+            score += HeuristicLineAntagonist(arr, gameProcess.N, first, flag);
 
-            arr = LinesCounter.VerLines(n, field, flag);
-            score += HeuristicLineAntagonist(arr, n, first, flag);
+            arr = LinesCounter.VerLines(gameProcess, flag);
+            score += HeuristicLineAntagonist(arr, gameProcess.N, first, flag);
 
             if (flag == PlayerCell.Antagonist)//bot
             {

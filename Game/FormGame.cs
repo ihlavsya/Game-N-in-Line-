@@ -12,14 +12,14 @@ namespace Game
 {
     public partial class FormGame : Form
     {
-        public int N;
-        public Color colorUser;
-        public Color colorBot;
+        public int N { get; set; }
+        public Color ColorUser { get; set; }
+        public Color ColorBot { get; set; }
         public FormGame()
         {
             N = 4;
-            colorBot = Color.Green;
-            colorUser = Color.Purple;
+            ColorBot = Color.Green;
+            ColorUser = Color.Purple;
             InitializeComponent();
         }
 
@@ -30,7 +30,7 @@ namespace Game
 
         private void buttonStartNewGame_Click(object sender, EventArgs e)
         {
-            FormGameProcess newGame = new FormGameProcess(N,colorUser,colorBot);
+            FormGameProcess newGame = new FormGameProcess(N, ColorUser, ColorBot);
             newGame.Show();
         }
 

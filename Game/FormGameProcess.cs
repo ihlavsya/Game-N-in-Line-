@@ -59,11 +59,7 @@ namespace Game
                     if (_NewGameField.Field[i, j] != PlayerCell.Empty)
                     {
                         Color b = Color.White;
-<<<<<<< HEAD
                         if (PlayerCell.Hero == _NewGameField.Field[i, j])
-=======
-                        if (PlayerCell.Hero == newGameField.Field[i, j])
->>>>>>> 1017f8ee37edad532daca0d0f23e36f9b1c21e7f
                         {
                             b = _User.playerColor;
                         }
@@ -71,11 +67,7 @@ namespace Game
                         {
                             b = _Bot.playerColor;
                         }
-<<<<<<< HEAD
                         DrawCell(j * _CellSize.Width, _CellSize.Height * (_NewGameField.QuanRows - i - 1), _CellSize.Width, _CellSize.Height, e, b);
-=======
-                        DrawCell(j * CellSize.Width, CellSize.Height * (newGameField.QuanRows - i - 1), CellSize.Width, CellSize.Height, e, b);
->>>>>>> 1017f8ee37edad532daca0d0f23e36f9b1c21e7f
                     }
                 }
             }
@@ -98,28 +90,15 @@ namespace Game
         private void panelGameArea_MouseClick(object sender, MouseEventArgs e)
         {
             Point coordinates = e.Location;
-<<<<<<< HEAD
             int col = coordinates.X / _CellSize.Width;
             _User.MakeStep(col, _NewGameField, PlayerCell.Hero);
             panelGameArea.Invalidate();
             if (_NewGameField.EndOfTheGame(PlayerCell.Hero) == 1)
-=======
-            int col = coordinates.X / CellSize.Width;
-            user.MakeStep(col, newGameField, PlayerCell.Hero);
-            panelGameArea.Invalidate();
-            // This part of code is similar to code below with the same two IF statemants.
-            // You can try to create separate method with parameters.
-            if (newGameField.EndOfTheGame(PlayerCell.Hero) == 1)
->>>>>>> 1017f8ee37edad532daca0d0f23e36f9b1c21e7f
             {
                 MessageBox.Show("You won!");
                 this.Close();
             }
-<<<<<<< HEAD
             if (_NewGameField.EndOfTheGame(PlayerCell.Hero) == 0)
-=======
-            if (newGameField.EndOfTheGame(PlayerCell.Hero) == 0)
->>>>>>> 1017f8ee37edad532daca0d0f23e36f9b1c21e7f
             {
                 MessageBox.Show("Draw!");
                 this.Close();

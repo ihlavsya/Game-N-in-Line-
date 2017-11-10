@@ -15,9 +15,15 @@ namespace Game
         private Color _ColorUser;
         private Color _ColorBot;
 
+<<<<<<< HEAD
         private int _N;
 
         private FormGame _MainForm;
+=======
+        private int n;
+        // Do not use variables name like 'a', 'b'. Please rename it.
+        private FormGame a;
+>>>>>>> 1017f8ee37edad532daca0d0f23e36f9b1c21e7f
 
         public FormSettings()
         {

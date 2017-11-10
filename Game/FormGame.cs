@@ -13,8 +13,13 @@ namespace Game
     public partial class FormGame : Form
     {
         public int N { get; set; }
+<<<<<<< HEAD
         public Color ColorUser { get; set; }
         public Color ColorBot { get; set; }
+=======
+        public Color colorUser;
+        public Color colorBot;
+>>>>>>> 1017f8ee37edad532daca0d0f23e36f9b1c21e7f
         public FormGame()
         {
             N = 4;

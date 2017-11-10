@@ -48,7 +48,11 @@ namespace Game
 
     public class Win
     {
+<<<<<<< HEAD
         public int W { get; set; }
+=======
+        public int W{ get; set; }
+>>>>>>> 1017f8ee37edad532daca0d0f23e36f9b1c21e7f
         public Win(int k)
         {
             W = k;
@@ -57,13 +61,20 @@ namespace Game
 
     public class BotPlayer : IPlayer
     {
+        // Do not use properties with lower case if its public.
         public Color playerColor { get; set; }
         public BotPlayer(Color color)
         {
             playerColor = color;
         }
+<<<<<<< HEAD
         public void MakeStep(int col, FieldContext gameProcess, PlayerCell first)
+=======
+
+        public void MakeStep(int col, FieldContext gameProcess,PlayerCell first)
+>>>>>>> 1017f8ee37edad532daca0d0f23e36f9b1c21e7f
         {
+            // What is 'k' ??
             int k = 0;
             for (int i = 0; i < 2 * gameProcess.N - 1; i++)
                 k += gameProcess.FreePositions[i];
@@ -82,6 +93,7 @@ namespace Game
             }
             else
             {
+                // What is 'a'. Please give good variables name.
                 Win a = new Win(0);
                 StepScore s = Minimax(gameProcess, first, PlayerCell.Antagonist, 0, -1, a);
                 col = s.Step;
@@ -94,9 +106,16 @@ namespace Game
         {
             public int Step;
             public long Score;
+
+            public readonly static StepScore ZeroScore = new StepScore { Score = 0, Step = 0 };
         }
 
+<<<<<<< HEAD
         private static StepScore StepScoreZero = new StepScore { Step = 0, Score = 0 };
+=======
+        // Why its static?
+        private static StepScore StepScoreZero;
+>>>>>>> 1017f8ee37edad532daca0d0f23e36f9b1c21e7f
 
         StepScore Minimax(FieldContext gameProcess, PlayerCell first, PlayerCell flag, int deep, int col, Win aWin)
         {
@@ -135,6 +154,7 @@ namespace Game
             a.Step = -1;
 
             if ((deep + 1) % 2 == 0)
+                // You can use long.MinValue if its Ok for you logic.
                 a.Score = (long)-1e15;
             else
                 a.Score = (long)1e15;

@@ -12,7 +12,7 @@ namespace Game
 {
     public partial class FormGame : Form
     {
-        public int N;
+        public int N { get; set; }
         public Color colorUser;
         public Color colorBot;
         public FormGame()

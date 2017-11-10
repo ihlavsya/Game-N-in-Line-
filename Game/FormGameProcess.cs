@@ -21,7 +21,7 @@ namespace Game
             InitializeComponent();
         }
 
-        public FormGameProcess(int N,Color a,Color b) :this()
+        public FormGameProcess(int N, Color a, Color b) : this()
         {
             newGameField = new FieldContext(N);
             user = new RealPlayer(a);
@@ -58,8 +58,8 @@ namespace Game
                 {
                     if (newGameField.Field[i, j] != PlayerCell.Empty)
                     {
-                        Color b=Color.White;
-                        if (PlayerCell.Hero==newGameField.Field[i,j])
+                        Color b = Color.White;
+                        if (PlayerCell.Hero == newGameField.Field[i, j])
                         {
                             b = user.playerColor;
                         }
@@ -67,13 +67,13 @@ namespace Game
                         {
                             b = bot.playerColor;
                         }
-                        DrawCell(j * CellSize.Width, CellSize.Height * (newGameField.QuanRows - i-1), CellSize.Width, CellSize.Height, e,b);
+                        DrawCell(j * CellSize.Width, CellSize.Height * (newGameField.QuanRows - i - 1), CellSize.Width, CellSize.Height, e, b);
                     }
                 }
             }
         }
 
-        private void DrawCell(int x,int y,int width,int height,PaintEventArgs e, Color a)
+        private void DrawCell(int x, int y, int width, int height, PaintEventArgs e, Color a)
         {
             Rectangle rect = new Rectangle(x, y, width, height);
             SolidBrush blueBrush = new SolidBrush(a);
@@ -90,15 +90,17 @@ namespace Game
         private void panelGameArea_MouseClick(object sender, MouseEventArgs e)
         {
             Point coordinates = e.Location;
-            int col =coordinates.X / CellSize.Width;
-            user.MakeStep(col,newGameField,PlayerCell.Hero);
+            int col = coordinates.X / CellSize.Width;
+            user.MakeStep(col, newGameField, PlayerCell.Hero);
             panelGameArea.Invalidate();
+            // This part of code is similar to code below with the same two IF statemants.
+            // You can try to create separate method with parameters.
             if (newGameField.EndOfTheGame(PlayerCell.Hero) == 1)
             {
                 MessageBox.Show("You won!");
                 this.Close();
             }
-            if(newGameField.EndOfTheGame(PlayerCell.Hero)==0)
+            if (newGameField.EndOfTheGame(PlayerCell.Hero) == 0)
             {
                 MessageBox.Show("Draw!");
                 this.Close();

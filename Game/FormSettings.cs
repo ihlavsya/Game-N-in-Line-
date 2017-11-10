@@ -16,7 +16,7 @@ namespace Game
         private Color colorBot;
 
         private int n;
-
+        // Do not use variables name like 'a', 'b'. Please rename it.
         private FormGame a;
 
         public FormSettings()
